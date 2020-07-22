@@ -6,19 +6,21 @@ public class OrbitalSimulation : MonoBehaviour
 {
 	OrbitalObject orbitalObject;
 	public int timeScale;
+	float timeStep;
 
 	void FixedUpdate() {
-		var orbitalObj = GameObject.FindGameObjectsWithTag("OrbitalObject");
-		foreach (var obj in orbitalObj) {
-			orbitalObject = obj.GetComponent<OrbitalObject>();
-			//orbitalObject.GravityCalculator();
-			//
-			Debug.Log(Time.time);
+		SimulationTimeStep();
+
+		var orbitalTag = GameObject.FindGameObjectsWithTag("OrbitalObject");
+		foreach (var obj in orbitalTag) {
+			OrbitalObject orbitalObject = obj.GetComponent<OrbitalObject>();
+			orbitalObject.GravityCalculator(timeStep);
+			orbitalObject.UpdatePosition(timeStep);
+			//Debug.Log(obj);
 		}
 	}
 
-	public void SimulationTimeStep(int timeScale) {
-
-
+	public void SimulationTimeStep() {
+		timeStep = Time.fixedDeltaTime * timeScale;
 	}
 }
