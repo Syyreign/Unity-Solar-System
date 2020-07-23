@@ -7,11 +7,11 @@ public class OrbitalObject : MonoBehaviour {
 	public float mass;
 	public float radius;
 	public Vector3 initialVelocity;
-	Vector3 currentVelocity;
+	public Vector3 currentVelocity;
 
 	public static UniversalConstants universalConstants;
 
-	void Awake() {
+	void Start() {
 		currentVelocity = initialVelocity;
 	}
 
@@ -20,7 +20,7 @@ public class OrbitalObject : MonoBehaviour {
 		var orbitalTag = FindObjectsOfType<OrbitalObject>();
 		foreach (var otherObject in orbitalTag) {
 			//Debug.Log(otherObject +""+ this);
-			Debug.Log(otherObject == this);
+			//Debug.Log(otherObject == this);
 			if (otherObject != this) {
 				float distanceSqr = (otherObject.GetComponent<Rigidbody>().position - GetComponent<Rigidbody>().position).sqrMagnitude;
 
@@ -34,6 +34,7 @@ public class OrbitalObject : MonoBehaviour {
 			}
 		}
 	}
+
 
 	public void UpdatePosition(float timeStep) {
 		GetComponent<Rigidbody>().position += currentVelocity * timeStep;

@@ -5,6 +5,8 @@ using UnityEngine;
 public class OrbitalSimulation : MonoBehaviour
 {
 	OrbitalObject orbitalObject;
+	OrbitalTrajectory orbitalTrajetory;
+
 	public int timeScale;
 	float timeStep;
 
